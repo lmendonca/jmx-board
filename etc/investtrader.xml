@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <dashboard>
 	<resource>
-		<title>Connection Pool</title>
-		<serviceURL>service:jmx:rmi:///jndi/rmi://localhost:1095/jmxrmi</serviceURL>
-		<object>com.mchange.v2.c3p0:type=PooledDataSource</object>
-		<attribute>numBusyConnections</attribute>
+		<title>Atraso Sinal</title>
+		<serviceURL>service:jmx:rmi:///jndi/rmi://192.168.0.1:1088/jmxrmi</serviceURL>
+		<object>hssinal:Method=jms,Type=Connection</object>
+		<attribute>Delay</attribute>
 		<period>5000</period>
-		<threshold>1</threshold>
-		org.quickfixj:type=Session,beginString=FIX.4.4,senderCompID=FIX002300,targetCompID=BOVESPA
+		<threshold>10000</threshold>
+	</resource>
+	<resource>
+		<title>ActiveMQ MemoryPercentUsage</title>
+		<serviceURL>service:jmx:rmi:///jndi/rmi://192.168.0.1:1616/jmxrmi</serviceURL>
+		<object>org.apache.activemq:BrokerName=localhost,Type=Broker</object>
+		<attribute>MemoryPercentUsage</attribute>
+		<period>10000</period>
+		<threshold>5</threshold>
 	</resource>
 	<resource>
 		<title>Porta FIX</title>
-		<serviceURL>service:jmx:rmi:///jndi/rmi://localhost:1095/jmxrmi</serviceURL>
-		<object>org.quickfixj:type=Session,beginString=FIX.4.4,senderCompID=FIX002300,targetCompID=BOVESPA</object>
+		<serviceURL>service:jmx:rmi:///jndi/rmi://localhost:1094/jmxrmi</serviceURL>
+		<object>org.quickfixj:type=Session,beginString=FIX.4.4,senderCompID=FIX002300,targetCompID=BOVESPA
+		</object>
 		<attribute>LoggedOn</attribute>
-		<period>2000</period>
+		<period>5000</period>
+	</resource>
+	<resource>
+		<title>Difusao WTr</title>
+		<serviceURL>service:jmx:rmi:///jndi/rmi://localhost:1098/jmxrmi</serviceURL>
+		<object>br.com.investtools.wtr.server:name=diff,type=WTrBridge
+		</object>
+		<attribute>Online</attribute>
+		<period>5000</period>
 	</resource>
 </dashboard>
