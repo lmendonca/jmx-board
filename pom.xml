@@ -35,7 +35,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>br.com.investtools.jmxboard.JMXMonitor</mainClass>
+							<mainClass>br.com.investtools.jmxboard.JMXBoard</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -54,7 +54,7 @@
 							<transformers>
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>br.com.investtools.jmxboard.JMXMonitor</mainClass>
+									<mainClass>br.com.investtools.jmxboard.JMXBoard</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
