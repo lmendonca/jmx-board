@@ -19,16 +19,14 @@
 	<resource>
 		<title>Porta FIX</title>
 		<serviceURL>service:jmx:rmi:///jndi/rmi://localhost:1094/jmxrmi</serviceURL>
-		<object>org.quickfixj:type=Session,beginString=FIX.4.4,senderCompID=FIX002300,targetCompID=BOVESPA
-		</object>
+		<object>org.quickfixj:type=Session,beginString=FIX.4.4,senderCompID=FIX002300,targetCompID=BOVESPA</object>
 		<attribute>LoggedOn</attribute>
 		<period>5000</period>
 	</resource>
 	<resource>
 		<title>Difusao WTr</title>
 		<serviceURL>service:jmx:rmi:///jndi/rmi://localhost:1098/jmxrmi</serviceURL>
-		<object>br.com.investtools.wtr.server:name=diff,type=WTrBridge
-		</object>
+		<object>br.com.investtools.wtr.server:name=diff,type=WTrBridge</object>
 		<attribute>Online</attribute>
 		<period>5000</period>
 	</resource>
