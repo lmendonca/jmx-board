@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dashboard>
+	<resource>
+		<title>Connection Pool</title>
+		<serviceURL>service:jmx:rmi:///jndi/rmi://localhost:1095/jmxrmi</serviceURL>
+		<object>com.mchange.v2.c3p0:type=PooledDataSource</object>
+		<attribute>numBusyConnections</attribute>
+		<period>5000</period>
+		<threshold>1</threshold>
+		org.quickfixj:type=Session,beginString=FIX.4.4,senderCompID=FIX002300,targetCompID=BOVESPA
+	</resource>
+	<resource>
+		<title>Porta FIX</title>
+		<serviceURL>service:jmx:rmi:///jndi/rmi://localhost:1095/jmxrmi</serviceURL>
+		<object>org.quickfixj:type=Session,beginString=FIX.4.4,senderCompID=FIX002300,targetCompID=BOVESPA</object>
+		<attribute>LoggedOn</attribute>
+		<period>2000</period>
+	</resource>
+</dashboard>
