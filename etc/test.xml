@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dashboard>
+	<resource>
+		<title>Memory</title>
+		<serviceURL>service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi</serviceURL>
+		<object>java.lang:type=Memory</object>
+		<attribute>HeapMemoryUsage</attribute>
+		<compositeDataKey>used</compositeDataKey>
+		<period>5000</period>
+		<threshold>20000000</threshold>
+		<format>#0</format>
+	</resource>
+</dashboard>

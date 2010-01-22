@@ -29,6 +29,8 @@ public class MonitoredResource {
 
 	private String attribute;
 
+	private String compositeDataKey;
+
 	private Double threshold;
 
 	private transient Object value;
@@ -36,6 +38,8 @@ public class MonitoredResource {
 	private transient String error;
 
 	private transient Date lastUpdate;
+	
+	private String format;
 
 	/**
 	 * No-arg constructor for XML construction.
@@ -123,6 +127,15 @@ public class MonitoredResource {
 		this.attribute = attribute;
 	}
 
+	@XmlElement
+	public String getCompositeDataKey() {
+		return compositeDataKey;
+	}
+
+	public void setCompositeDataKey(String compositeDataKey) {
+		this.compositeDataKey = compositeDataKey;
+	}
+
 	public void setError(String error) {
 		pcs.firePropertyChange("error", this.error, this.error = error);
 	}
@@ -160,6 +173,8 @@ public class MonitoredResource {
 	}
 
 	public boolean isAlarmOn() {
+		Object value = getValue();
+
 		if (value == null) {
 			// no value yet, alarm is on
 			return true;
@@ -180,6 +195,14 @@ public class MonitoredResource {
 		}
 
 		return false;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
 }

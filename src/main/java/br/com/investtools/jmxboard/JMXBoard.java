@@ -65,7 +65,7 @@ public class JMXBoard extends JFrame {
 
 		// load the file
 		JAXBContext c = JAXBContext
-				.newInstance("br.com.investtools.jmxmonitor");
+				.newInstance("br.com.investtools.jmxboard");
 		Unmarshaller unmarshaller = c.createUnmarshaller();
 		File file = new File(args[0]);
 		final Dashboard dashboard = (Dashboard) unmarshaller.unmarshal(file);

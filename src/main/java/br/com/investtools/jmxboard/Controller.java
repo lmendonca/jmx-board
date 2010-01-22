@@ -12,13 +12,19 @@ import java.util.concurrent.TimeUnit;
 
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
+import javax.management.openmbean.CompositeData;
 import javax.management.remote.JMXConnector;
 
 import org.apache.commons.pool.KeyedObjectPool;
 import org.apache.commons.pool.KeyedPoolableObjectFactory;
 import org.apache.commons.pool.impl.StackKeyedObjectPool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Controller {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(Controller.class);
 
 	private transient PropertyChangeSupport pcs = new PropertyChangeSupport(
 			this);
@@ -89,8 +95,8 @@ public class Controller {
 				});
 	}
 
-	public Object getValue(String serviceURL, String object, String attribute)
-			throws Exception {
+	public Object getValue(String serviceURL, String object, String attribute,
+			String key) throws Exception {
 		JMXConnector jmxc = null;
 		try {
 			// pega conector do pool
@@ -98,7 +104,20 @@ public class Controller {
 			MBeanServerConnection mbsc = jmxc.getMBeanServerConnection();
 
 			ObjectName name = new ObjectName(object);
-			return mbsc.getAttribute(name, attribute);
+			Object value = mbsc.getAttribute(name, attribute);
+			if (value instanceof CompositeData) {
+				if (key == null) {
+					logger
+							.warn(
+									"Attribute {}:{} is CompositeData but resource did not define a 'compositeDataKey'",
+									object, attribute);
+					value = null;
+				} else {
+					CompositeData data = (CompositeData) value;
+					value = data.get(key);
+				}
+			}
+			return value;
 
 		} catch (Exception e) {
 			if (null != jmxc) {

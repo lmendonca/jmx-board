@@ -29,9 +29,11 @@ public class MonitoredResourceRunnable implements Runnable {
 		String serviceURL = resource.getServiceURL();
 		String object = resource.getObject();
 		String attribute = resource.getAttribute();
+		String key = resource.getCompositeDataKey();
 		try {
 			// do the JMX query to get the value
-			Object value = controller.getValue(serviceURL, object, attribute);
+			Object value = controller.getValue(serviceURL, object, attribute, key);
+
 			resource.setValue(value);
 
 			logger.debug("Querying " + resource.getTitle() + ": "

@@ -3,6 +3,8 @@ package br.com.investtools.jmxboard.table;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,8 +25,26 @@ public class DashboardTableCellRenderer extends JLabel implements
 
 		// text
 		if (value instanceof Date) {
-			DateFormat format = new SimpleDateFormat("HH:mm:ss");
+			String pattern = "HH:mm:ss";
+			DateFormat format = new SimpleDateFormat(pattern);
 			setText(format.format((Date) value));
+		} else if (value instanceof Number) {
+			// optional formatting
+			if (table.getModel() instanceof DashboardTableModel) {
+				DashboardTableModel model = (DashboardTableModel) table
+						.getModel();
+				MonitoredResource resource = model.getResource(row);
+				String pattern = resource.getFormat();
+				if (pattern != null) {
+					NumberFormat format = new DecimalFormat(pattern);
+					setText(format.format(value));
+				} else {
+					setText(value.toString());
+				}
+			} else {
+				setText(value.toString());
+			}
+
 		} else {
 			setText(value != null ? value.toString() : "");
 		}
